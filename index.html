@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#65d8ff">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+content="#63d8ff">
+
+<meta name="mobile-web-app-capable"
+content="yes">
+
+<meta name="apple-mobile-web-app-capable"
+content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style"
+content="default">
+
+<meta name="apple-mobile-web-app-title"
+content="Balloon Pop">
+
+<link rel="manifest" href="manifest.json">
 
 <title>Balloon Pop 🎈</title>
 
+
 <style>
+
 *{
     box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
     margin:0;
     padding:0;
     width:100%;
@@ -23,7 +46,13 @@ html,body{
 }
 
 body{
-    background:linear-gradient(180deg,#63d8ff 0%,#bff3ff 55%,#f0fcff 100%);
+    background:
+    linear-gradient(
+        180deg,
+        #63d8ff 0%,
+        #bff3ff 55%,
+        #f0fcff 100%
+    );
 }
 
 #game{
@@ -33,7 +62,8 @@ body{
     overflow:hidden;
 }
 
-/* Background bubbles */
+
+/* BACKGROUND */
 
 .bubble{
     position:absolute;
@@ -69,150 +99,245 @@ body{
     bottom:17%;
 }
 
-/* Top score */
+
+/* TOP */
 
 .top{
     position:absolute;
     top:15px;
     left:12px;
     right:12px;
+
     display:flex;
     justify-content:space-between;
+
     z-index:10;
 }
 
 .box{
     background:rgba(255,255,255,.92);
+
     padding:10px 16px;
+
     border-radius:20px;
+
     font-size:18px;
+
     font-weight:bold;
+
     color:#444;
-    box-shadow:0 4px 12px rgba(0,0,0,.12);
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,.12);
 }
 
-/* Balloon */
+
+/* BALLOON */
 
 #balloon{
     position:absolute;
+
     width:78px;
     height:92px;
-    border-radius:50% 50% 45% 45%;
+
+    border-radius:
+    50% 50% 45% 45%;
+
     background:#ff4f81;
+
     box-shadow:
-        inset -12px -12px 15px rgba(0,0,0,.12),
-        5px 8px 12px rgba(0,0,0,.18);
-    transition:transform .08s;
+    inset -12px -12px 15px rgba(0,0,0,.12),
+    5px 8px 12px rgba(0,0,0,.18);
+
+    transition:
+    transform .08s;
+
     z-index:5;
+
+    cursor:pointer;
 }
+
+
+/* BALLOON PRESS */
 
 #balloon:active{
     transform:scale(.82);
 }
 
-/* Balloon shine */
+
+/* BALLOON SHINE */
 
 #balloon::before{
     content:"";
+
     position:absolute;
+
     width:18px;
     height:25px;
-    background:rgba(255,255,255,.38);
+
+    background:
+    rgba(255,255,255,.38);
+
     border-radius:50%;
+
     left:15px;
     top:12px;
+
     transform:rotate(25deg);
 }
 
-/* Balloon knot */
+
+/* BALLOON KNOT */
 
 #balloon::after{
     content:"";
+
     position:absolute;
+
     width:12px;
     height:12px;
+
     background:inherit;
+
     bottom:-6px;
     left:33px;
+
     transform:rotate(45deg);
 }
 
-/* String */
+
+/* STRING */
 
 .string{
     position:absolute;
+
     width:2px;
     height:45px;
+
     background:#777;
+
     left:38px;
     top:90px;
 }
 
-/* Start / Result screens */
+
+/* START / RESULT */
 
 .screen{
     position:absolute;
+
     inset:0;
+
     z-index:20;
+
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
+
     text-align:center;
-    background:rgba(255,255,255,.18);
+
+    background:
+    rgba(255,255,255,.18);
+
     padding:20px;
 }
 
+
 .screen h1{
     margin:0;
+
     font-size:43px;
+
     color:white;
-    text-shadow:0 4px 7px rgba(0,0,0,.25);
+
+    text-shadow:
+    0 4px 7px
+    rgba(0,0,0,.25);
 }
+
 
 .screen p{
     color:white;
+
     font-size:20px;
-    margin:12px 0 25px;
+
+    margin:
+    12px 0 25px;
 }
+
+
+/* BUTTON */
 
 button{
     border:0;
-    padding:16px 48px;
+
+    padding:
+    16px 48px;
+
     border-radius:50px;
+
     background:#ff4f81;
+
     color:white;
+
     font-size:21px;
+
     font-weight:bold;
-    box-shadow:0 6px 0 #d93666;
+
+    box-shadow:
+    0 6px 0 #d93666;
+
+    cursor:pointer;
 }
 
+
 button:active{
-    transform:translateY(5px);
-    box-shadow:0 1px 0 #d93666;
+    transform:
+    translateY(5px);
+
+    box-shadow:
+    0 1px 0 #d93666;
 }
+
+
+/* RESULT */
 
 #result{
     display:none;
 }
 
+
 .resultScore{
     color:white;
+
     font-size:25px;
+
     margin:8px;
 }
 
-/* Pop effect */
+
+/* POP EFFECT */
 
 .pop{
     position:absolute;
+
     font-size:35px;
-    animation:pop .45s forwards;
+
+    animation:
+    pop .45s forwards;
+
     pointer-events:none;
+
     z-index:15;
 }
 
+
 @keyframes pop{
+
     0%{
         transform:scale(.5);
         opacity:1;
@@ -222,9 +347,11 @@ button:active{
         transform:scale(1.7);
         opacity:0;
     }
+
 }
 
-/* Small phones */
+
+/* SMALL PHONES */
 
 @media(max-width:380px){
 
@@ -237,212 +364,396 @@ button:active{
     }
 
     button{
-        padding:14px 40px;
+        padding:
+        14px 40px;
+
         font-size:19px;
     }
 
     .box{
         font-size:16px;
-        padding:9px 13px;
+
+        padding:
+        9px 13px;
     }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div id="game">
 
-    <!-- Background -->
+
+    <!-- BACKGROUND BUBBLES -->
+
     <div class="bubble b1"></div>
+
     <div class="bubble b2"></div>
+
     <div class="bubble b3"></div>
+
     <div class="bubble b4"></div>
 
-    <!-- Score -->
+
+    <!-- SCORE / TIMER -->
+
     <div class="top">
-        <div class="box">
-            ⭐ <span id="score">0</span>
-        </div>
 
         <div class="box">
-            ⏱️ <span id="time">30</span>
+
+            ⭐
+            <span id="score">
+                0
+            </span>
+
         </div>
+
+
+        <div class="box">
+
+            ⏱️
+            <span id="time">
+                30
+            </span>
+
+        </div>
+
     </div>
 
-    <!-- Balloon -->
+
+    <!-- BALLOON -->
+
     <div id="balloon">
+
         <div class="string"></div>
+
     </div>
 
-    <!-- Start -->
-    <div class="screen" id="startScreen">
 
-        <h1>🎈 Balloon Pop</h1>
+    <!-- START SCREEN -->
+
+    <div
+        class="screen"
+        id="startScreen"
+    >
+
+        <h1>
+            🎈 Balloon Pop
+        </h1>
+
 
         <p>
             Tap the balloons as fast as you can!
         </p>
 
-        <button onclick="startGame()">
+
+        <button
+            onclick="startGame()"
+        >
             PLAY 🎮
         </button>
 
     </div>
 
-    <!-- Result -->
-    <div class="screen" id="result">
 
-        <h1>🎉 Amazing!</h1>
+    <!-- RESULT SCREEN -->
+
+    <div
+        class="screen"
+        id="result"
+    >
+
+        <h1>
+            🎉 Amazing!
+        </h1>
+
 
         <div class="resultScore">
+
             ⭐ Score:
-            <span id="finalScore">0</span>
+
+            <span id="finalScore">
+                0
+            </span>
+
         </div>
+
 
         <div class="resultScore">
+
             🏆 Best:
-            <span id="bestScore">0</span>
+
+            <span id="bestScore">
+                0
+            </span>
+
         </div>
 
-        <button onclick="startGame()">
+
+        <button
+            onclick="startGame()"
+        >
             PLAY AGAIN 🔄
         </button>
 
     </div>
 
+
 </div>
+
+
 
 <script>
 
+
+/* GAME VARIABLES */
+
 let score = 0;
+
 let time = 30;
+
 let timer;
+
 let running = false;
 
-const balloon = document.getElementById("balloon");
-const scoreText = document.getElementById("score");
-const timeText = document.getElementById("time");
+
+
+/* ELEMENTS */
+
+const balloon =
+document.getElementById("balloon");
+
+const scoreText =
+document.getElementById("score");
+
+const timeText =
+document.getElementById("time");
+
+
+
+/* BALLOON COLORS */
 
 const colors = [
+
     "#ff4f81",
+
     "#ff5252",
+
     "#7c4dff",
+
     "#00bcd4",
+
     "#ff9800",
+
     "#4caf50",
+
     "#e91e63"
+
 ];
 
-/* Move balloon */
+
+
+/* MOVE BALLOON */
 
 function moveBalloon(){
 
-    const maxX = window.innerWidth - 90;
-    const maxY = window.innerHeight - 190;
+    const maxX =
+    window.innerWidth - 90;
 
-    const x = Math.random() * maxX + 5;
-    const y = Math.random() * maxY + 100;
+    const maxY =
+    window.innerHeight - 190;
 
-    balloon.style.left = x + "px";
-    balloon.style.top = y + "px";
+
+    const x =
+    Math.random() * maxX + 5;
+
+    const y =
+    Math.random() * maxY + 100;
+
+
+    balloon.style.left =
+    x + "px";
+
+    balloon.style.top =
+    y + "px";
+
 
     const color =
-        colors[Math.floor(Math.random() * colors.length)];
+    colors[
+        Math.floor(
+            Math.random() *
+            colors.length
+        )
+    ];
 
-    balloon.style.background = color;
+
+    balloon.style.background =
+    color;
+
 }
 
-/* Pop animation */
+
+
+/* POP EFFECT */
 
 function popEffect(){
 
-    const pop = document.createElement("div");
+    const pop =
+    document.createElement("div");
 
-    pop.className = "pop";
 
-    pop.textContent = "💥";
+    pop.className =
+    "pop";
+
+
+    pop.textContent =
+    "💥";
+
 
     pop.style.left =
-        balloon.offsetLeft + 20 + "px";
+    balloon.offsetLeft +
+    20 +
+    "px";
+
 
     pop.style.top =
-        balloon.offsetTop + 20 + "px";
+    balloon.offsetTop +
+    20 +
+    "px";
 
-    document.getElementById("game")
-        .appendChild(pop);
+
+    document
+    .getElementById("game")
+    .appendChild(pop);
+
 
     setTimeout(function(){
+
         pop.remove();
+
     },450);
+
 }
 
-/* Balloon click */
 
-balloon.addEventListener("click",function(){
 
-    if(!running) return;
+/* BALLOON CLICK */
 
-    score++;
+balloon.addEventListener(
+    "click",
+    function(){
 
-    scoreText.textContent = score;
+        if(!running)
+            return;
 
-    popEffect();
 
-    moveBalloon();
+        score++;
 
-});
 
-/* Start game */
+        scoreText.textContent =
+        score;
+
+
+        popEffect();
+
+
+        moveBalloon();
+
+    }
+);
+
+
+
+/* START GAME */
 
 function startGame(){
 
     score = 0;
+
     time = 30;
+
     running = true;
 
-    scoreText.textContent = "0";
-    timeText.textContent = "30";
 
-    document.getElementById("startScreen")
-        .style.display = "none";
+    scoreText.textContent =
+    "0";
 
-    document.getElementById("result")
-        .style.display = "none";
+
+    timeText.textContent =
+    "30";
+
+
+    document
+    .getElementById("startScreen")
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById("result")
+    .style.display =
+    "none";
+
 
     moveBalloon();
 
+
     clearInterval(timer);
 
-    timer = setInterval(function(){
 
-        time--;
+    timer =
+    setInterval(
+        function(){
 
-        timeText.textContent = time;
+            time--;
 
-        if(time <= 0){
 
-            endGame();
+            timeText.textContent =
+            time;
 
-        }
 
-    },1000);
+            if(time <= 0){
+
+                endGame();
+
+            }
+
+        },
+        1000
+    );
+
 }
 
-/* End game */
+
+
+/* END GAME */
 
 function endGame(){
 
     running = false;
 
+
     clearInterval(timer);
 
+
     let best =
-        Number(localStorage.getItem("balloonBest") || 0);
+    Number(
+        localStorage.getItem(
+            "balloonBest"
+        ) || 0
+    );
+
 
     if(score > best){
 
         best = score;
+
 
         localStorage.setItem(
             "balloonBest",
@@ -451,27 +762,47 @@ function endGame(){
 
     }
 
-    document.getElementById("finalScore")
-        .textContent = score;
 
-    document.getElementById("bestScore")
-        .textContent = best;
+    document
+    .getElementById("finalScore")
+    .textContent =
+    score;
 
-    document.getElementById("result")
-        .style.display = "flex";
+
+    document
+    .getElementById("bestScore")
+    .textContent =
+    best;
+
+
+    document
+    .getElementById("result")
+    .style.display =
+    "flex";
+
 }
 
-/* Keep balloon inside screen */
 
-window.addEventListener("resize",function(){
 
-    if(running){
-        moveBalloon();
+/* SCREEN RESIZE */
+
+window.addEventListener(
+    "resize",
+    function(){
+
+        if(running){
+
+            moveBalloon();
+
+        }
+
     }
+);
 
-});
 
 </script>
 
+
 </body>
-  </html>
+
+            </html>
