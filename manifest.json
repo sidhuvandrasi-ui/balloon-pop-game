@@ -1,0 +1,17 @@
+{
+  "name": "Balloon Pop",
+  "short_name": "Balloon Pop",
+  "description": "A fun balloon popping game for kids",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#63d8ff",
+  "theme_color": "#63d8ff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}
